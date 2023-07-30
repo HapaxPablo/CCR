@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Регистрация</h2>
+  <form (ngSubmit)="register()" class="form">
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" name="email" [(ngModel)]="userData.email" required>
+    </div>
+    <div class="form-group">
+      <label>Пароль:</label>
+      <input type="password" name="password" [(ngModel)]="userData.password" required>
+    </div>
+    <button type="submit" >Зарегистрироваться</button>
+    <p>Если есть аккаунт</p>
+    <button (click)="navigateToLoginPage()">Вход</button>
+  </form>
+  <div *ngIf="registrationError" class="error-message">
+    Пожалуйста, заполните все обязательные поля для регистрации.
+  </div>
+</div>

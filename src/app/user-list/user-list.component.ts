@@ -77,16 +77,17 @@ export class UserListComponent implements OnInit{
   public deleteUser(userId: number): void {
     this.http.delete(`${this.apiUrl}api/users/${userId}`).subscribe(
       (response) => {
-        // Обработка успешного ответа от сервера (если требуется)
         console.log('Пользователь успешно удален:', response);
-        // Удалить пользователя из списка после успешного удаления
         this.users = this.users.filter((user) => user.id !== userId);
       },
       (error) => {
-        // Обработка ошибки при отправке запроса или получении ответа
         console.error('Error deleting user:', error);
       }
     );
+  }
+
+  public navigateToLoginPage(): void {
+    this.router.navigate(['/login']);
   }
 
 }

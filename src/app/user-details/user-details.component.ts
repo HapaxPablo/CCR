@@ -72,7 +72,7 @@ export class UserDetailsComponent implements OnInit {
   }
   
   public navigateToUserDetails(): void {
-    this.router.navigate(['/users']);
+    this.router.navigate(['/home']);
   }
   public onEdit(): void {
     this.isEditing = true;

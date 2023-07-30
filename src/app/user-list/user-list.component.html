@@ -1,0 +1,33 @@
+<h2>Список пользователей</h2>
+<form [formGroup] = "userForm">
+<ul>
+    <div class="flex">
+        <li *ngFor="let user of users">
+            <div class="user-info">
+                <p>
+                    {{ user.first_name }} {{ user.last_name }}
+                </p>
+            </div>
+            <img src="{{user.avatar}}" alt="user_avatar">
+            <button (click)="navigateToUserDetails(user.id)">Подробнее</button>
+            <button (click)="deleteUser(user.id)">Удалить</button>
+        </li>
+    </div>
+</ul>
+</form>
+
+<h2>Список ресурсов</h2>
+<form [formGroup] = "resourcesForm">
+<ul>
+    <div class="flex">
+        <li *ngFor="let resource of resources">
+            <div class="resource-info">
+                <p>name: {{ resource.name }}</p>
+                <p>year: {{ resource.year }}</p>
+                <p>color: {{ resource.color }}</p>
+                <p>pantone_value: {{ resource.pantone_value }}</p>
+            </div>
+        </li>
+    </div>
+</ul>
+</form>

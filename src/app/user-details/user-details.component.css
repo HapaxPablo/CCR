@@ -1,0 +1,70 @@
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+
+h2 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.user-info {
+    text-align: center;
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 18px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+button {
+  align-items: center;
+  appearance: button;
+  background-color: #0276FF;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  font-family: "RM Neue",sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  padding: 10px 21px;
+  text-align: center;
+  text-transform: none;
+  transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 5px;
+}
+
+button:active {
+  background-color: #006AE8;
+}
+
+button:hover {
+  background-color: #1C84FF;
+}
+
+input {
+  margin-top: 20px;
+}
+
+label {
+  margin-left: 15px;
+}

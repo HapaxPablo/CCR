@@ -1,0 +1,49 @@
+<h2>Сведения о пользователе</h2>
+<form [formGroup]="userDetailsForm">
+    <div *ngIf="user" class="user-info">
+        <p><strong>Имя: </strong>{{ user.first_name }}</p>
+        <p><strong>Фамилия: </strong>{{ user.last_name }}</p>
+        <p><strong>Email: </strong>{{ user.email }}</p>
+        <img src="{{user.avatar}}" alt="user_avatar">
+    </div>
+    <div class="center-container">
+        <button (click)="navigateToUserDetails()">На главную страницу</button>
+    </div>
+    <div *ngIf="user" class="user-info">
+        <h2>Изменить</h2>
+        <p><strong>Имя: </strong>{{ user.first_name }}</p>
+        <p><strong>Фамилия: </strong>{{ user.last_name }}</p>
+        <p><strong>Email: </strong>{{ user.email }}</p>
+        <p>Аватар: {{ user.avatar }}</p>
+        <div *ngIf="!isEditing" class="center-container">
+          <button (click)="onEdit()">Изменить</button>
+        </div>
+        <div *ngIf="isEditing" class="user-info">
+          <form (submit)="editUser()">
+            <label>
+              Имя:
+              <input type="text" [(ngModel)]="user.first_name" name="first_name" required>
+            </label>
+            <label>
+              Фамилия:
+              <input type="text" [(ngModel)]="user.last_name" name="last_name" required>
+            </label>
+            <label>
+              Email:
+              <input type="email" [(ngModel)]="user.email" name="email" required>
+            </label>
+            <label>
+              Аватар:
+              <input type="text" [(ngModel)]="user.avatar" name="address">
+            </label>
+            <div class="center-container">
+                <button type="submit" style=>Сохранить</button>
+                <button type="button" (click)="isEditing = false">Отмена</button>
+            </div>
+          </form>
+        </div>
+      </div>
+</form>
+
+
+  

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ILoginData } from '../models/loginData.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  public errorMessage = ''
   public userData: ILoginData = {} as ILoginData
   private apiUrl = 'https://reqres.in/'
   registrationSuccess = false
@@ -28,9 +29,10 @@ export class LoginComponent {
         this.registrationError = false
         this.navigateToHomePage()
       },
-      (error) => {
-        this.registrationError = true;
-      }
+      (err: HttpErrorResponse) => {
+        this.registrationError = true
+        this.errorMessage = err.error.error
+    }
     );
   }
   public navigateToRegisterPage(): void {

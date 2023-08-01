@@ -1,8 +1,8 @@
+<form [formGroup] = "userForm"> 
 <h2>Список пользователей</h2>
-<form [formGroup] = "userForm">
 <ul>
     <div class="flex">
-        <li *ngFor="let user of users">
+        <li *ngFor="let user of usersService.users$ | async">
             <div class="user-info">
                 <p>
                     {{ user.first_name }} {{ user.last_name }}
@@ -10,17 +10,18 @@
             </div>
             <img src="{{user.avatar}}" alt="user_avatar">
             <button (click)="navigateToUserDetails(user.id)">Подробнее</button>
-            <button (click)="deleteUser(user.id)">Удалить</button>
+            <button (click)="usersService.deleteUser(user.id)">Удалить</button>
         </li>
     </div>
 </ul>
 </form>
 
-<h2>Список ресурсов</h2>
+
 <form [formGroup] = "resourcesForm">
+<h2>Список ресурсов</h2>
 <ul>
     <div class="flex">
-        <li *ngFor="let resource of resources">
+        <li *ngFor="let resource of usersService.resources$ | async">
             <div class="resource-info">
                 <p>name: {{ resource.name }}</p>
                 <p>year: {{ resource.year }}</p>
@@ -30,8 +31,8 @@
         </li>
     </div>
 </ul>
-</form>
-
 <div class="flex">
     <button type="submit" (click)="navigateToLoginPage()">Выход</button>
 </div>
+</form>
+

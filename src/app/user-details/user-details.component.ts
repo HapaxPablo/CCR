@@ -1,27 +1,38 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../models/user.interface';
-import { IResponseSingleUser } from '../models/responseSingleUser.interface';
+import { UsersService } from '../services/users.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css']
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent implements OnInit, OnDestroy {
   public user: IUser = {} as IUser;
-  private apiUrl = 'https://reqres.in/';
   public userDetailsForm!: FormGroup;
   public isEditing = false;
+  private subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
     private router: Router,
-    private formBuilder: FormBuilder
-  ) { }
+    private formBuilder: FormBuilder,
+    public userService: UsersService,
+  ) { 
+
+    this.subscription = this.userService.user$.subscribe((user) => {
+      if(user){
+        this.user.first_name = user.first_name
+        this.user.last_name = user.last_name
+        this.user.email = user.email
+        this.user.avatar = user.avatar
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.userDetailsForm = this.formBuilder.group({
@@ -33,34 +44,21 @@ export class UserDetailsComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       const userId = +params['id'];
-      this.loadUserDetails(userId);
+      this.userService.getUserDetails(userId);
     });
-    
   }
 
-  private loadUserDetails(userId: number): void {
-    this.http.get<IResponseSingleUser>(`${this.apiUrl}api/users/${userId}`).subscribe(
-      (response: IResponseSingleUser) => {
-        this.user = response.data;
-        console.log(response);
-        this.userDetailsForm.patchValue({
-          first_name: this.user.first_name,
-          last_name: this.user.last_name,
-          email: this.user.email,
-          avatar: this.user.avatar
-        });
-      },
-      (error) => {
-        console.error('Error fetching user details:', error);
-      }
-    );
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
-  
+
+
   public editUser(): void {
     if (this.userDetailsForm.valid) {
       const updatedUserData = this.userDetailsForm.value;
-      this.http.put(`${this.apiUrl}api/users/${this.user.id}`, updatedUserData).subscribe(
-        (response: any) => {
+      const userId = this.user.id;
+      this.userService.editUser(userId, updatedUserData).subscribe(
+        (response) => {
           console.log('Данные пользователя успешно обновлены:', response);
           this.isEditing = false;
         },
@@ -77,4 +75,6 @@ export class UserDetailsComponent implements OnInit {
   public onEdit(): void {
     this.isEditing = true;
   }
+
+  
 }

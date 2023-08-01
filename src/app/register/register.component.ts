@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http'
-import { IRegisterData } from '../models/registerData.interface';
+import {HttpErrorResponse} from '@angular/common/http'
 import { Router } from '@angular/router';
-import { RegisterService } from '../services/register.service';
+import { AuthService } from '../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -21,7 +20,7 @@ export class RegisterComponent implements OnInit{
     password: new FormControl('', Validators.required)
   })
 
-  constructor(private router: Router, private regServ: RegisterService) { }
+  constructor(private router: Router, private regServ: AuthService) { }
 
   ngOnInit(): void {  }
 

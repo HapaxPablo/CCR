@@ -1,4 +1,4 @@
-export interface IResources {
+export interface IResource {
     id: number
     name: string
     year: number

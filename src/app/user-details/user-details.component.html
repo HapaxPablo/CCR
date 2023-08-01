@@ -1,6 +1,6 @@
 <h2>Сведения о пользователе</h2>
 <form [formGroup]="userDetailsForm">
-    <div *ngIf="user" class="user-info">
+    <div *ngIf="userService.user$ | async" class="user-info">
         <p><strong>Имя: </strong>{{ user.first_name }}</p>
         <p><strong>Фамилия: </strong>{{ user.last_name }}</p>
         <p><strong>Email: </strong>{{ user.email }}</p>
@@ -9,7 +9,7 @@
     <div class="center-container">
         <button (click)="navigateToUserDetails()">На главную страницу</button>
     </div>
-    <div *ngIf="user" class="user-info">
+    <div *ngIf="userService.user$ | async" class="user-info">
         <h2>Изменить</h2>
         <p><strong>Имя: </strong>{{ user.first_name }}</p>
         <p><strong>Фамилия: </strong>{{ user.last_name }}</p>

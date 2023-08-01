@@ -49,6 +49,4 @@ export class RegisterComponent implements OnInit{
     this.router.navigate(['/home']);
   }
 
-
-
 }
